@@ -2,27 +2,111 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta-name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Decoder Code for Cipher</title>
-    <link rel="stylesheet" href="Index.css">
+
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #fceabb, #f8b500);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 60px;
+        }
+
+        header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 30px 50px;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        h1 {
+            font-size: 2.8em;
+            color: #333;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+
+        h2 a {
+            font-size: 1.4em;
+            color: #0055ff;
+            text-decoration: none;
+            transition: 0.3s ease;
+        }
+
+        h2 a:hover {
+            color: #002288;
+            text-shadow: 0 0 10px rgba(0, 85, 255, 0.4);
+        }
+
+        #Passcode {
+            margin-top: 20px;
+            padding: 12px 20px;
+            width: 260px;
+            font-size: 1.1em;
+            border-radius: 8px;
+            border: 2px solid #aaa;
+            transition: 0.3s ease;
+        }
+
+        #Passcode.correct {
+            border-color: #00c853;
+            box-shadow: 0 0 12px rgba(0, 200, 83, 0.7);
+        }
+
+        #successMessage {
+            margin-top: 15px;
+            font-size: 1.2em;
+            color: #00a844;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            font-weight: bold;
+        }
+
+        #successMessage.show {
+            opacity: 1;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 
 <body>
     <header>
         <h1>Decoder Code for Cipher</h1>
         <h2><a id="link" target="_blank" href="https://colab.research.google.com/drive/1jONqu9gmZgklUZ8SSekHqBLI-4rcz96p">Colab Code</a></h2>
+
         <input id="Passcode" type="text" placeholder="What is the password?">
+        <div id="successMessage">✔ Correct Password!</div>
     </header>
 
     <script>
-        document.getElementById('Passcode').addEventListener('keyup', function() {
-            const link = document.getElementById('link');
-            const input = document.getElementById('Passcode').value;
+        const input = document.getElementById('Passcode');
+        const link = document.getElementById('link');
+        const success = document.getElementById('successMessage');
 
-            if (input === '傻逼') {
+        input.addEventListener('keyup', function() {
+            if (input.value === '傻逼') {
                 link.href = "https://colab.research.google.com/drive/13i88yEMxPREQmC6b7iZuNrgmXgGZDWuM#scrollTo=SagJI4G881-9";
+                input.classList.add('correct');
+                success.classList.add('show');
             } else {
                 link.href = "https://colab.research.google.com/drive/1jONqu9gmZgklUZ8SSekHqBLI-4rcz96p";
+                input.classList.remove('correct');
+                success.classList.remove('show');
             }
         });
     </script>
